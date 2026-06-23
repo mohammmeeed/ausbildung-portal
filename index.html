@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ausbildung Bewerbung Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">EduPortal</div>
+            <div class="nav-controls">
+                <button id="lang-toggle" class="btn-icon">FR</button>
+                <button id="theme-toggle" class="btn-icon">🌙</button>
+                <button id="admin-nav" class="btn-text">Admin</button>
+            </div>
+        </nav>
+    </header>
+
+    <main id="app-container">
+        <!-- Home Section -->
+        <section id="view-home" class="view active">
+            <div class="hero">
+                <h1 data-i18n="homeTitle">Ausbildung Bewerbung Portal</h1>
+                <p data-i18n="homeDesc">Willkommen! Starten Sie Ihre Karriere bei uns mit einer erstklassigen Ausbildung.</p>
+                <button id="btn-start" class="btn-primary" data-i18n="homeBtn">Bewerbung starten</button>
+            </div>
+        </section>
+
+        <!-- Form Section -->
+        <section id="view-form" class="view hidden">
+            <div class="form-card">
+                <h2 data-i18n="formTitle">Ihre Bewerbung</h2>
+                <form id="application-form" novalidate>
+                    <div class="form-group">
+                        <label for="fullName" data-i18n="labelName">Vollständiger Name</label>
+                        <input type="text" id="fullName" required placeholder="Max Mustermann">
+                        <span class="error-msg" id="error-fullName" data-i18n="errorRequired">Bitte ausfüllen</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" data-i18n="labelEmail">E-Mail</label>
+                        <input type="email" id="email" required placeholder="max@example.com">
+                        <span class="error-msg" id="error-email" data-i18n="errorEmail">Ungültige E-Mail</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age" data-i18n="labelAge">Alter</label>
+                        <input type="number" id="age" required min="15" max="99" placeholder="18">
+                        <span class="error-msg" id="error-age" data-i18n="errorAge">Bitte ein gültiges Alter eingeben</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="germanLevel" data-i18n="labelGerman">Deutschkenntnisse</label>
+                        <select id="germanLevel" required>
+                            <option value="" disabled selected data-i18n="selectOption">Bitte wählen</option>
+                            <option value="A1">A1</option>
+                            <option value="A2">A2</option>
+                            <option value="B1">B1</option>
+                            <option value="B2">B2</option>
+                            <option value="C1">C1</option>
+                        </select>
+                        <span class="error-msg" id="error-germanLevel" data-i18n="errorRequired">Bitte wählen</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="field" data-i18n="labelField">Fachbereich</label>
+                        <select id="field" required>
+                            <option value="" disabled selected data-i18n="selectOption">Bitte wählen</option>
+                            <option value="IT" data-i18n="fieldIT">Informatik (IT)</option>
+                            <option value="Business" data-i18n="fieldBusiness">Wirtschaft (Business)</option>
+                            <option value="Logistics" data-i18n="fieldLogistics">Logistik (Logistics)</option>
+                            <option value="Sales" data-i18n="fieldSales">Vertrieb (Sales)</option>
+                        </select>
+                        <span class="error-msg" id="error-field" data-i18n="errorRequired">Bitte wählen</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cv" data-i18n="labelCV">Lebenslauf hochladen (PDF)</label>
+                        <input type="file" id="cv" accept=".pdf" required>
+                        <span class="error-msg" id="error-cv" data-i18n="errorCV">Bitte PDF hochladen</span>
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="btn-submit">
+                        <span class="btn-text" data-i18n="btnSubmit">Absenden</span>
+                        <div class="loader hidden"></div>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Success Section -->
+        <section id="view-success" class="view hidden">
+            <div class="success-card">
+                <div class="success-icon">✅</div>
+                <h2 data-i18n="successTitle">Vielen Dank für Ihre Bewerbung!</h2>
+                <p data-i18n="successID">Ihre Bewerbungs-ID: <span id="display-app-id" class="highlight"></span></p>
+                <div class="summary-box">
+                    <h3 data-i18n="summaryTitle">Zusammenfassung:</h3>
+                    <ul id="summary-list">
+                        <!-- Filled via JS -->
+                    </ul>
+                </div>
+                <button id="btn-back-home" class="btn-secondary" data-i18n="btnBack">Zurück zur Startseite</button>
+            </div>
+        </section>
+
+        <!-- Admin Section -->
+        <section id="view-admin" class="view hidden">
+            <div class="admin-card">
+                <h2>Admin Dashboard</h2>
+                <button id="btn-admin-home" class="btn-secondary mb-1">Back Home</button>
+                <div class="table-container">
+                    <table id="applications-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Field</th>
+                                <th>Level</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-tbody">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
